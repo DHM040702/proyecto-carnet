@@ -73,7 +73,7 @@ Este sistema está orientado a *instituciones de educación superior* que buscan
 
 ## 🚀 Instalación básica
 
-bash
+''' bash
 # 1. Clonar el repositorio
 git clone <URL_DEL_REPOSITORIO>
 
@@ -95,7 +95,7 @@ php artisan serve
 npm run dev
 
 
----
+'''
 
 ## 🧑‍💻 Uso del sistema
 
