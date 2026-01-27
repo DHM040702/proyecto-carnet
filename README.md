@@ -1,7 +1,7 @@
 ![Estado](https://img.shields.io/badge/estado-activo-success)
 ![Backend](https://img.shields.io/badge/backend-Laravel-red)
 ![Frontend](https://img.shields.io/badge/frontend-Vue.js-green)
-![Base%20de%20datos](https://img.shields.io/badge/database-SQL-blue)
+![Base%20de%20datos](https://img.shields.io/badge/database-SQL%20Server-blue)
 ![Licencia](https://img.shields.io/badge/licencia-Privada-orange)
 
 ---
