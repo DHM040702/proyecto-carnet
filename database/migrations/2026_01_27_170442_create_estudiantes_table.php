@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('estudiantes', function (Blueprint $table) {
             $table->id();
             $table->string('codigo_estudiante', 12)->unique();
-            $table->date('creado en');
+            $table->date('fecha_creacion');
             $table->string('correo')->unique();
             //Claves foraneas
             $table->foreignId('persona_id')
