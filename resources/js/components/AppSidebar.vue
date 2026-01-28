@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { 
+    // BookOpen, activar para las redirecciones pe
+    // Folder, activar para las redirecciones pe
+    LayoutGrid,
+    FileText,
+    CheckCircle,
+    Settings as SettingsIcon,
+    TrendingUp,
+    BarChart3,
+    User as UserIcon
+} from 'lucide-vue-next';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
@@ -19,23 +29,50 @@ import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Inicio',
         href: dashboard(),
         icon: LayoutGrid,
+    },
+    {
+        title: 'Solicitud',
+        href: '/solicitud',
+        icon: FileText,
+    },
+    {
+        title: 'Validación',
+        href: '/validacion',
+        icon: CheckCircle,
+    },
+    {
+        title: 'Gestión',
+        href: '/gestion',
+        icon: SettingsIcon,
+    },
+    {
+        title: 'Seguimiento',
+        href: '/seguimiento',
+        icon: TrendingUp,
+    },
+    {
+        title: 'Reportes',
+        href: '/reportes',
+        icon: BarChart3,
+    },
+    {
+        title: 'Usuario',
+        href: '/usuario',
+        icon: UserIcon,
     },
 ];
 
 const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
+    //aca redirecciones pe mascotas
+    //{
+    //    title: 'Github Repo',
+    //   href: 'https://github.com/laravel/vue-starter-kit',
+    //    icon: Folder,
+    // },
+    
 ];
 </script>
 
