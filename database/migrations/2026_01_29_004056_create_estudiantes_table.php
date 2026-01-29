@@ -17,15 +17,15 @@ return new class extends Migration
             $table->date('fecha_creacion');
             $table->string('correo')->unique();
             //Claves foraneas
-            $table->foreignId('persona_id')
+            $table->foreignId('personas_id')
                   ->constrained('personas')
                   ->onDelete('cascade');
 
-            $table->foreignId('escuela_id')
+            $table->foreignId('escuelas_id')
                   ->constrained('escuelas')
                   ->onDelete('cascade');
 
-            $table->foreignId('matricula_id')
+            $table->foreignId('matriculas_id')
                   ->constrained('matriculas')
                   ->onDelete('cascade');
 

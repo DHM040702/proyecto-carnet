@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('numero_solicitud')->unique();
 
-            $table->foreignId('estudiante_id')
+            $table->foreignId('estudiantes_id')
                   ->constrained('estudiantes')
                   ->onDelete('cascade');
 
@@ -34,7 +34,7 @@ return new class extends Migration
                   ->constrained("fotos")
                   ->onDelete("cascade");
 
-            $table->foreignId('semestre_id')
+            $table->foreignId('semestres_id')
                   ->constrained('semestres')
                   ->onDelete('cascade');
 
