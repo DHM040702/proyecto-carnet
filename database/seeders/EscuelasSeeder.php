@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Escuela;
 use Illuminate\Database\Seeder;
 
 class EscuelasSeeder extends Seeder
@@ -12,6 +13,8 @@ class EscuelasSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Escuela::insert([
+            ['escuela' => 'Escuela de ingeniería de sistemas e informática']
+        ]);
     }
 }
