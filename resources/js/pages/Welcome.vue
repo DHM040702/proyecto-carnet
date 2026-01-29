@@ -12,35 +12,6 @@ withDefaults(
 );
 </script>
 
-<style scoped>
-@keyframes blob {
-    0% {
-        transform: translate(0px, 0px) scale(1);
-    }
-    33% {
-        transform: translate(30px, -50px) scale(1.1);
-    }
-    66% {
-        transform: translate(-20px, 20px) scale(0.9);
-    }
-    100% {
-        transform: translate(0px, 0px) scale(1);
-    }
-}
-
-.animate-blob {
-    animation: blob 7s infinite;
-}
-
-.animation-delay-2000 {
-    animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-    animation-delay: 4s;
-}
-</style>
-
 <template>
     <Head title="Welcome">
         <link rel="preconnect" href="https://rsms.me/" />
@@ -49,7 +20,6 @@ withDefaults(
     <div
         class="relative flex min-h-screen flex-col items-center bg-gradient-to-br from-white via-[#f0f9ff] to-[#dbeafe] p-6 text-[#1b1b18] lg:justify-center lg:p-8 dark:bg-gradient-to-br dark:from-[#0a0a0a] dark:via-[#1e3a8a] dark:to-[#1e40af] overflow-hidden"
     >
-        <!-- Elementos decorativos de fondo -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
             <div class="absolute top-0 -left-4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
             <div class="absolute top-0 -right-4 w-72 h-72 bg-cyan-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -62,7 +32,6 @@ withDefaults(
             <main
                 class="flex w-full max-w-2xl items-center justify-center"
             >
-                <!-- Contenedor central en cuadrado con fondo blanco -->
                 <div class="bg-white rounded-2xl lg:rounded-3xl shadow-2xl p-6 sm:p-8 md:p-10 lg:p-12 w-full dark:bg-gray-800">
                     <div class="flex flex-col items-center text-center">
                         <!-- Badge -->
