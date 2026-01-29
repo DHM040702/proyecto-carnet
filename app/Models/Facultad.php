@@ -10,6 +10,7 @@ class Facultad extends Model
 
     protected $fillable = [
         'facultad',
+        'abreviatura',
         'usercreacion'
     ];
 }
