@@ -15,7 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             FacultadesSeeder::class,
-            EscuelasSeeder::class
+            EscuelasSeeder::class,
+            PersonasSeeder::class,
+            MatriculasSeeder::class,
+            SemestresSeeder::class
         ]);
     }
 }
