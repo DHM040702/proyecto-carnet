@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
             $table->binary('voucher');
+            $table->string("numero_voucher");
             $table->string('ubicacion')->nullable();
             $table->string('usercreacion', 50);
             $table->timestamps();
