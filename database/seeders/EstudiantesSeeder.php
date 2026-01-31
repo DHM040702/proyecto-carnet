@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Estudiante;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,8 @@ class EstudiantesSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Estudiante::insert([
+            []
+        ]);
     }
 }
