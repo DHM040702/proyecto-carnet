@@ -21,7 +21,10 @@ class DatabaseSeeder extends Seeder
             MatriculasSeeder::class,
             SemestresSeeder::class,
             EstadosSeeder::class,
-            EstudiantesSeeder::class
+            EstudiantesSeeder::class,
+            FotosSeeder::class,
+            VouchersSeeder::class,
+            SolicitudesSeeder::class
         ]);
     }
 }
