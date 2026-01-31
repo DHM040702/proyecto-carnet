@@ -24,7 +24,7 @@ class SemestresSeeder extends Seeder
             ['semestre' => '2022-2' , 'fecha_inicio' => '2022-08-25' , 'fecha_fin' => '2022-12-12' , 'fecha_inicio_solicitud' => '2022-08-28' , 'fecha_fin_solicitud' => '2022-09-30' , 'usercreacion' => 'SEEDER' , 'created_at' => now() , 'updated_at' => now()],
             ['semestre' => '2021-1' , 'fecha_inicio' => '2021-03-15' , 'fecha_fin' => '2021-07-18' , 'fecha_inicio_solicitud' => '2021-04-22' , 'fecha_fin_solicitud' => '2021-11-20' , 'usercreacion' => 'SEEDER' , 'created_at' => now() , 'updated_at' => now()],
             ['semestre' => '2021-2' , 'fecha_inicio' => '2021-08-25' , 'fecha_fin' => '2021-12-12' , 'fecha_inicio_solicitud' => '2021-09-06' , 'fecha_fin_solicitud' => '2021-10-15' , 'usercreacion' => 'SEEDER' , 'created_at' => now() , 'updated_at' => now()],
-            ['semestre' => '2026-1' , 'fecha_inicio' => '2026-03-23' , 'fecha_inicio_solicitud' => '2026-04-10' , 'usercreacion' => 'SEEDER' , 'created_at' => now() , 'updated_at' => now()]
+            ['semestre' => '2026-1' , 'fecha_inicio' => '2026-03-23' , 'fecha_fin' => '' , 'fecha_inicio_solicitud' => '2026-04-10' , 'fecha_fin_solicitud' => '' , 'usercreacion' => 'SEEDER' , 'created_at' => now() , 'updated_at' => now()]
         ]);
     }
 }
