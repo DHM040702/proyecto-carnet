@@ -38,6 +38,7 @@ return new class extends Migration
                   ->constrained('semestres')
                   ->onDelete('cascade');
 
+            $table->string('usercreacion', 50);
             $table->timestamps();
         });
     }

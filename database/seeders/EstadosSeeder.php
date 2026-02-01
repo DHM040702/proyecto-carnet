@@ -14,9 +14,9 @@ class EstadosSeeder extends Seeder
     public function run()
     {
         Estado::insert([
-            ['nombre_descripción' => 'PENDIENTE' , 'descripcion' => 'N/N' , 'usercreacion' => 'SEEDER'],
-            ['nombre_descripción' => 'APROBADO' , 'descripcion' => 'N/N', 'usercreacion' => 'SEEDER'],
-            ['nombre_descripción' => 'RECHAZADO' , 'descripcion' => 'N/N', 'usercreacion' => 'SEEDER']
+            ['estado' => 'PENDIENTE' , 'descripcion' => 'N/N' , 'usercreacion' => 'SEEDER' , 'created_at' => now() , 'updated_at' => now()],
+            ['estado' => 'APROBADO' , 'descripcion' => 'N/N', 'usercreacion' => 'SEEDER' , 'created_at' => now() , 'updated_at' => now()],
+            ['estado' => 'RECHAZADO' , 'descripcion' => 'N/N', 'usercreacion' => 'SEEDER' , 'created_at' => now() , 'updated_at' => now()]
         ]);
     }
 }
