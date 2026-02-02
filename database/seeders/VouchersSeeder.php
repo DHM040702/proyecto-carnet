@@ -18,8 +18,8 @@ class VouchersSeeder extends Seeder
         $origen_4 = database_path('seeders\files\vouchers\voucher_4.jpg');
 
         //Ruta de destino en las carpetas
-        $rutaDestino_1 = 'fotos\perfil\voucher_1.jpg';
-        $rutaDestino_4 = 'fotos\perfil\voucher_4.jpg';
+        $rutaDestino_1 = 'fotos\voucher\voucher_1.jpg';
+        $rutaDestino_4 = 'fotos\voucher\voucher_4.jpg';
 
         //Copia de archivo en las carpetas
         Storage::disk('public')->put(

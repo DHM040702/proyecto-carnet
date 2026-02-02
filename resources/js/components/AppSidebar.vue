@@ -9,7 +9,9 @@ import {
     Settings as SettingsIcon,
     TrendingUp,
     BarChart3,
-    User as UserIcon
+    User as UserIcon,
+    Calendar,
+    Building
 } from 'lucide-vue-next';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
@@ -64,6 +66,19 @@ const mainNavItems: NavItem[] = [
         icon: UserIcon,
     },
 ];
+const adminItems: NavItem[] = [
+    {
+        title: 'Semestre',
+        href: '/semestre',
+        icon: Calendar,
+    },
+    {
+        title: 'Facultad',
+        href: '/facultad',
+        icon: Building,
+    },
+  
+];
 
 const footerNavItems: NavItem[] = [
     //aca redirecciones pe mascotas
@@ -91,7 +106,8 @@ const footerNavItems: NavItem[] = [
         </SidebarHeader>
 
         <SidebarContent>
-            <NavMain :items="mainNavItems" />
+            <NavMain :items="mainNavItems" :title="'Menú Principal'" />
+            <NavMain :items="adminItems" :title="'Menú Administrativo'" />
         </SidebarContent>
 
         <SidebarFooter>
