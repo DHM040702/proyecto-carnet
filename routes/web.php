@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SemestresController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -38,6 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('usuario', function () {
         return Inertia::render('Usuario/Index');
     })->name('usuario');
+    Route::resource('semestre', SemestresController::class);
 });
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';
