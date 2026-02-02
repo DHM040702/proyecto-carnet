@@ -6,6 +6,10 @@
 
 ---
 
+## Documentación
+- 📄 [README general](README.md)
+- 🗄️ [Documentación de base de datos](README-DataBase.md)
+
 ## 📌 Descripción general
 
 El *Sistema de Emisión de Carné Universitario* es una aplicación diseñada para *gestionar, registrar y controlar* la emisión de carnés de identificación para estudiantes universitarios.
