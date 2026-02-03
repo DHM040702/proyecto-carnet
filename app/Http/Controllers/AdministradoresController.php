@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\administradores;
+use App\Models\Administrador;
 use Illuminate\Http\Request;
 
 class AdministradoresController extends Controller
@@ -34,7 +34,7 @@ class AdministradoresController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(administradores $administradores)
+    public function show(Administrador $administradores)
     {
         //
     }
@@ -42,7 +42,7 @@ class AdministradoresController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(administradores $administradores)
+    public function edit(Administrador $administradores)
     {
         //
     }
@@ -50,7 +50,7 @@ class AdministradoresController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, administradores $administradores)
+    public function update(Request $request, Administrador $administradores)
     {
         //
     }
@@ -58,7 +58,7 @@ class AdministradoresController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(administradores $administradores)
+    public function destroy(Administrador $administradores)
     {
         //
     }

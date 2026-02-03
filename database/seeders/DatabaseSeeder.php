@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
             EstudiantesSeeder::class,
             FotosSeeder::class,
             VouchersSeeder::class,
-            SolicitudesSeeder::class
+            SolicitudesSeeder::class,
+            RolesSeeder::class,
+            AdministradoresSeeder::class
         ]);
     }
 }
