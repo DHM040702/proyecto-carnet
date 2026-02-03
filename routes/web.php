@@ -40,6 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Usuario/Index');
     })->name('usuario');
     Route::resource('semestre', SemestresController::class);
+    Route::resource('facultad', App\Http\Controllers\FacultadesController::class);
 });
 
 require __DIR__ . '/settings.php';
