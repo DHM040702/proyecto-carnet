@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { 
+import {
     // BookOpen, activar para las redirecciones pe
     // Folder, activar para las redirecciones pe
     LayoutGrid,
@@ -11,7 +11,8 @@ import {
     BarChart3,
     User as UserIcon,
     Calendar,
-    Building
+    Building,
+    BookMarked,
 } from 'lucide-vue-next';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
@@ -77,7 +78,11 @@ const adminItems: NavItem[] = [
         href: '/facultad',
         icon: Building,
     },
-  
+    {
+        title: 'Escuela',
+        href: '/escuela',
+        icon: BookMarked,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
@@ -87,7 +92,7 @@ const footerNavItems: NavItem[] = [
     //   href: 'https://github.com/laravel/vue-starter-kit',
     //    icon: Folder,
     // },
-    
+
 ];
 </script>
 

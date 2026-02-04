@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\SemestresController;
+use App\Http\Controllers\FacultadesController;
+use App\Http\Controllers\EscuelasController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -40,7 +42,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Usuario/Index');
     })->name('usuario');
     Route::resource('semestre', SemestresController::class);
-    Route::resource('facultad', App\Http\Controllers\FacultadesController::class);
+    Route::resource('facultad', FacultadesController::class);
+    Route::resource('escuela', EscuelasController::class);
+
+    Route::get('/api/facultades', function () {
+        return App\Models\Facultad::select('id', 'facultad')->get();
+    });
 });
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';

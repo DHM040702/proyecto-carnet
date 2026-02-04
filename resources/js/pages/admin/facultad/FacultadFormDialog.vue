@@ -85,12 +85,12 @@ const submit = () => {
     <DialogContent class="w-[480px]">
       <DialogHeader>
         <DialogTitle>
-          {{ facultad ? 'Editar facultad' : 'Crear facultad' }}
+          {{ props.facultad ? 'Editar facultad' : 'Crear nueva facultad' }}
         </DialogTitle>
       </DialogHeader>
 
       <DialogDescription class="text-mauve11 mt-[10px] mb-5 text-sm leading-normal">
-        {{ facultad ? 'Se editará la facultad' : 'Se creará una nueva facultad' }}
+        {{ props.facultad ? 'Editar la facultad' : 'Crear una nueva facultad' }}
       </DialogDescription>
 
       <Label class="text-sm font-semibold leading-[35px] text-stone-700 dark:text-white" for="facultad">
