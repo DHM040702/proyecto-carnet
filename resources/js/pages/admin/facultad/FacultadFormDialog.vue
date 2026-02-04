@@ -26,6 +26,25 @@ const form = useForm({
   abreviatura: '',
 })
 
+const validateForm = (): boolean => {
+  const errors: Record<string, string> = {}
+
+  if (!form.facultad.trim()) {
+    errors.facultad = '*Campo requerido'
+  }
+
+  if (!form.abreviatura.trim()) {
+    errors.abreviatura = '*Campo requerido'
+  }
+
+  if (Object.keys(errors).length > 0) {
+    form.errors = errors
+    return false
+  }
+
+  return true
+}
+
 const resetForm = () => {
   form.reset()
   form.errors = {}
@@ -47,6 +66,10 @@ watch(
 )
 
 const submit = () => {
+  if (!validateForm()) {
+    return
+  }
+
   props.facultad
     ? form.put(facultad.update(props.facultad.id).url, {
         onSuccess: () => resetForm(),
@@ -78,7 +101,7 @@ const submit = () => {
         class="border inline-flex h-[35px] rounded-lg px-[10px] text-sm shadow-sm outline-none focus:shadow-[0_0_0_2px_black]"
         type="text"
         v-model="form.facultad"
-        placeholder="Ejemplo: Ingeniería"
+        placeholder="Ejemplo: Ingeniería de Sistemas e Informática"
       />
       <InputError :message="form.errors.facultad" />
 
@@ -90,7 +113,7 @@ const submit = () => {
         class="border inline-flex h-[35px] rounded-lg px-[10px] text-sm shadow-sm outline-none focus:shadow-[0_0_0_2px_black]"
         type="text"
         v-model="form.abreviatura"
-        placeholder="Ejemplo: ING"
+        placeholder="Ejemplo: FISI"
       />
       <InputError :message="form.errors.abreviatura" />
 
