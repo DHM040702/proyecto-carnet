@@ -66,7 +66,7 @@ class FondoRule
 
         $ok =
             $avg >= 185 &&        // fondo claro
-            $stdDev <= 40 &&      // gradiente suave permitido
+            $stdDev <= 85 &&      // gradiente suave permitido
             $ratioSaltos <= 0.18; // sin sombras duras
 
         return [

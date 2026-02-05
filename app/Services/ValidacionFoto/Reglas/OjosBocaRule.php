@@ -15,16 +15,15 @@ class OjosBocaRule
         $width = imagesx($img);
         $height = imagesy($img);
 
-        // Zona central donde DEBE estar el rostro
-        $x1 = (int)($width * 0.25);
-        $x2 = (int)($width * 0.75);
-        $y1 = (int)($height * 0.15);
-        $y2 = (int)($height * 0.85);
+        // Zona facial realista
+        $x1 = (int)($width * 0.30);
+        $x2 = (int)($width * 0.70);
+        $y1 = (int)($height * 0.20);
+        $y2 = (int)($height * 0.65);
 
         $pixelesOscuros = 0;
         $total = 0;
 
-        // muestreo de la zona central
         for ($x = $x1; $x < $x2; $x += 5) {
             for ($y = $y1; $y < $y2; $y += 5) {
                 $rgb = imagecolorat($img, $x, $y);
@@ -33,10 +32,9 @@ class OjosBocaRule
                 $g = ($rgb >> 8) & 0xFF;
                 $b = $rgb & 0xFF;
 
-                $luminosidad = ($r + $g + $b) / 3;
+                $lum = ($r + $g + $b) / 3;
 
-                // piel / cabello / ojos ≠ fondo claro
-                if ($luminosidad < 200) {
+                if ($lum < 200) {
                     $pixelesOscuros++;
                 }
 
@@ -46,17 +44,20 @@ class OjosBocaRule
 
         imagedestroy($img);
 
-        $ratio = $pixelesOscuros / $total;
+        $ratio = $pixelesOscuros / max(1, $total);
 
-        // umbral empírico
-        $ok = $ratio >= 0.15 && $ratio <= 0.45;
+        $ok = $ratio >= 0.10 && $ratio <= 0.50;
 
         return [
             'key' => 'ojos_boca',
             'label' => 'Rostro visible (ojos y boca)',
-            'ok' => false,
-            'mensaje' => 'El rostro no está centrado o está parcialmente oculto',
-            'detalle' => 'Contraste facial insuficiente',
+            'ok' => $ok,
+            'mensaje' => $ok
+                ? null
+                : 'El rostro no está correctamente centrado o no es visible',
+            'detalle' => $ok
+                ? null
+                : 'Contraste facial detectado: ' . round($ratio * 100, 1) . '%',
         ];
     }
 }
