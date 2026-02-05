@@ -77,6 +77,29 @@ watch(
   { immediate: true }
 )
 
+// Clear field-specific errors when the user updates the inputs
+watch(
+  () => form.facultad_id,
+  (val) => {
+    if (val) {
+      if (form.errors && form.errors.facultad_id) {
+        delete form.errors.facultad_id
+      }
+    }
+  }
+)
+
+watch(
+  () => form.escuela,
+  (val) => {
+    if (val && val.trim && val.trim().length > 0) {
+      if (form.errors && form.errors.escuela) {
+        delete form.errors.escuela
+      }
+    }
+  }
+)
+
 const submit = () => {
   if (!validateForm()) {
     return
@@ -110,7 +133,7 @@ const submit = () => {
       </Label>
       <input
         id="escuela"
-        class="border inline-flex h-[35px] rounded-lg px-[10px] text-sm shadow-sm outline-none focus:shadow-[0_0_0_2px_black]"
+        class="border inline-flex h-[35px] rounded-lg px-[10px]  dark:bg-gray-900 text-sm shadow-sm outline-none focus:shadow-[0_0_0_2px_black]"
         type="text"
         v-model="form.escuela"
         placeholder="Ejemplo: Ingeniería de Sistemas"
@@ -120,16 +143,15 @@ const submit = () => {
       <Label class="text-sm font-semibold leading-[35px] text-stone-700 dark:text-white mt-4" for="facultad_id">
         Facultad
       </Label>
+
       <select
         id="facultad_id"
-        class="border inline-flex h-[35px] rounded-lg px-[10px] text-sm shadow-sm outline-none focus:shadow-[0_0_0_2px_black]"
         v-model="form.facultad_id"
-      >
+        class="w-full inline-flex h-[35px] rounded-lg px-[10px] text-sm shadow-sm outline-none border border-gray-300 bg-white text-black dark:border-gray-700 dark:bg-gray-900 dark:text-white focus:ring-2 focus:ring-black dark:focus:ring-white">
         <option value="">Selecciona una facultad</option>
-        <option v-for="fac in facultades" :key="fac.id" :value="fac.id">
-          {{ fac.facultad }}
-        </option>
+        <option v-for="fac in facultades" :key="fac.id" :value="fac.id">{{ fac.facultad }}</option>
       </select>
+
       <InputError :message="form.errors.facultad_id" />
 
       <DialogFooter class="mt-6">

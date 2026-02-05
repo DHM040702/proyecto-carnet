@@ -98,7 +98,7 @@ const submit = () => {
       </Label>
       <input
         id="facultad"
-        class="border inline-flex h-[35px] rounded-lg px-[10px] text-sm shadow-sm outline-none focus:shadow-[0_0_0_2px_black]"
+        class="border inline-flex h-[35px] rounded-lg px-[10px] text-sm shadow-sm outline-none bg-white text-gray-900 dark:bg-gray-900 dark:border-gray-700 dark:text-white focus:shadow-[0_0_0_2px_black] dark:focus:shadow-[0_0_0_2px_white]"
         type="text"
         v-model="form.facultad"
         placeholder="Ejemplo: Ingeniería de Sistemas e Informática"
@@ -110,7 +110,7 @@ const submit = () => {
       </Label>
       <input
         id="abreviatura"
-        class="border inline-flex h-[35px] rounded-lg px-[10px] text-sm shadow-sm outline-none focus:shadow-[0_0_0_2px_black]"
+        class="border inline-flex h-[35px] rounded-lg px-[10px] text-sm shadow-sm outline-none bg-white text-gray-900 dark:bg-gray-900 dark:border-gray-700 dark:text-white focus:shadow-[0_0_0_2px_black] dark:focus:shadow-[0_0_0_2px_white]"
         type="text"
         v-model="form.abreviatura"
         placeholder="Ejemplo: FISI"

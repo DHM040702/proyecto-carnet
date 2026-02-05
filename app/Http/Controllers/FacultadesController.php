@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Facultad\StoreFacultadRequest;
+use App\Http\Requests\Facultad\UpdateFacultadRequest;
 use App\Models\Facultad;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class FacultadesController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -18,7 +23,7 @@ class FacultadesController extends Controller
         $facultades = Facultad::query()
             ->when($filters['search'] ?? null, function ($q, $search) {
                 $q->where('facultad', 'like', "%{$search}%")
-                  ->orWhere('abreviatura', 'like', "%{$search}%");
+                    ->orWhere('abreviatura', 'like', "%{$search}%");
             })
             ->orderBy('facultad', 'asc')
             ->paginate(5)
@@ -41,12 +46,9 @@ class FacultadesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreFacultadRequest $request)
     {
-        $data = $request->validate([
-            'facultad' => 'required|string|max:255',
-            'abreviatura' => 'nullable|string|max:50',
-        ]);
+        $data = $request->validated();
 
         $data['usercreacion'] = auth()->id();
 
@@ -81,12 +83,9 @@ class FacultadesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Facultad $facultad)
+    public function update(UpdateFacultadRequest $request, Facultad $facultad)
     {
-        $data = $request->validate([
-            'facultad' => 'required|string|max:255',
-            'abreviatura' => 'nullable|string|max:50',
-        ]);
+        $data = $request->validated();
 
         $facultad->update($data);
 
