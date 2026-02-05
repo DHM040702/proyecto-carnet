@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SemestresController;
+use App\Http\Controllers\ValidacionController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -23,6 +24,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('validacion', function () {
         return Inertia::render('Validacion/Index');
     })->name('validacion');
+
+    Route::post('/validacion/foto', [ValidacionController::class, 'validarFoto'])
+        ->name('validacion.foto');
 
     Route::get('gestion', function () {
         return Inertia::render('Gestion/Index');

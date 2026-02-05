@@ -46,6 +46,7 @@ class HandleInertiaRequests extends Middleware
             'success' => fn () => $request->session()->get('success'),
             'error'   => fn () => $request->session()->get('error'),
             'toast_id' => fn () => $request->session()->get('toast_id'),
+            'validacion' => fn () => $request->session()->get('validacion'),
         ],
         ];
     }
