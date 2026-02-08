@@ -15,27 +15,39 @@ class OjosBocaRule
         $width = imagesx($img);
         $height = imagesy($img);
 
-        // Zona facial realista
+        // Zona donde debe estar el rostro
         $x1 = (int)($width * 0.30);
         $x2 = (int)($width * 0.70);
-        $y1 = (int)($height * 0.20);
-        $y2 = (int)($height * 0.65);
+        $y1 = (int)($height * 0.18);
+        $y2 = (int)($height * 0.80);
 
-        $pixelesOscuros = 0;
         $total = 0;
+        $contraste = 0;
 
-        for ($x = $x1; $x < $x2; $x += 5) {
-            for ($y = $y1; $y < $y2; $y += 5) {
+        $left = 0;
+        $right = 0;
+
+        $zonaOjos = 0;
+        $zonaBoca = 0;
+
+        for ($x = $x1; $x < $x2; $x += 6) {
+            for ($y = $y1; $y < $y2; $y += 6) {
                 $rgb = imagecolorat($img, $x, $y);
-
                 $r = ($rgb >> 16) & 0xFF;
                 $g = ($rgb >> 8) & 0xFF;
                 $b = $rgb & 0xFF;
 
-                $lum = ($r + $g + $b) / 3;
+                // luminancia perceptual
+                $lum = 0.299 * $r + 0.587 * $g + 0.114 * $b;
 
-                if ($lum < 200) {
-                    $pixelesOscuros++;
+                if ($lum < 215) {
+                    $contraste++;
+
+                    if ($x < $width / 2) $left++;
+                    else $right++;
+
+                    if ($y < $height * 0.45) $zonaOjos++;
+                    if ($y > $height * 0.55 && $y < $height * 0.75) $zonaBoca++;
                 }
 
                 $total++;
@@ -44,9 +56,15 @@ class OjosBocaRule
 
         imagedestroy($img);
 
-        $ratio = $pixelesOscuros / max(1, $total);
+        $ratio = $contraste / $total;
+        $simetria = min($left, $right) / max($left, $right, 1);
 
-        $ok = $ratio >= 0.10 && $ratio <= 0.50;
+        $ok =
+            $ratio >= 0.18 &&        // hay rostro
+            $ratio <= 0.60 &&        // no es fondo dominante
+            $simetria >= 0.65 &&     // rostro centrado
+            $zonaOjos > 30 &&        // ojos presentes
+            $zonaBoca > 25;          // boca presente
 
         return [
             'key' => 'ojos_boca',
@@ -54,10 +72,28 @@ class OjosBocaRule
             'ok' => $ok,
             'mensaje' => $ok
                 ? null
-                : 'El rostro no está correctamente centrado o no es visible',
-            'detalle' => $ok
-                ? null
-                : 'Contraste facial detectado: ' . round($ratio * 100, 1) . '%',
+                : $this->mensaje($ratio, $simetria, $zonaOjos, $zonaBoca),
         ];
+    }
+
+    protected function mensaje($ratio, $simetria, $ojos, $boca): string
+    {
+        if ($ratio < 0.18) {
+            return 'No se detecta suficiente contraste facial';
+        }
+
+        if ($simetria < 0.65) {
+            return 'El rostro no está centrado';
+        }
+
+        if ($ojos < 30) {
+            return 'No se detecta claramente la zona de los ojos';
+        }
+
+        if ($boca < 25) {
+            return 'No se detecta claramente la boca';
+        }
+
+        return 'El rostro no cumple las condiciones requeridas';
     }
 }

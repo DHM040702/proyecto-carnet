@@ -14,6 +14,10 @@ return [
     |
     */
 
+    'fastapi' => [
+        'url' => env('http://127.0.0.1:9000'),
+    ],
+
     'postmark' => [
         'key' => env('POSTMARK_API_KEY'),
     ],

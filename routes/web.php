@@ -23,6 +23,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Solicitud/Index');
     })->name('solicitud');
 
+    // // Vista principal del módulo
+    // Route::get('/', [ValidacionController::class, 'index'])
+    //     ->name('validacion.index');
+
     Route::get('validacion', function () {
         return Inertia::render('Validacion/Index');
     })->name('validacion');

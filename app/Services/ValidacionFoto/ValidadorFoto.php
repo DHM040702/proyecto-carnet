@@ -7,6 +7,7 @@ use App\Services\ValidacionFoto\Reglas\{
     DimensionRule,
     FormatoRule,
     FondoRule,
+    FastApiRule,
     OjosBocaRule
 };
 
@@ -21,7 +22,8 @@ class ValidadorFoto
             new PesoRule(),
             new DimensionRule(),
             new FondoRule(),
-            new OjosBocaRule(),
+            new FastApiRule()
+            //new OjosBocaRule(),
         ];
     }
 
