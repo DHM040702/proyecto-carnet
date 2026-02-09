@@ -3,18 +3,18 @@
 namespace App\Services\ValidacionFoto\Reglas;
 
 use App\Services\ValidacionFoto\Helpers\ImageDpiReader;
-
 class DimensionRule
 {
     protected int $ancho = 240;
     protected int $alto = 288;
+
+    // tamaño físico esperado en cm
+    protected float $anchoCm = 2.03;
+    protected float $altoCm  = 2.44;
+
     protected int $dpiEsperado = 300;
     protected int $toleranciaPx = 2;
-
-    public function key(): string
-    {
-        return 'dimensiones';
-    }
+    protected int $toleranciaDpi = 10;
 
     public function check(string $path): array
     {
@@ -24,66 +24,32 @@ class DimensionRule
             abs($width - $this->ancho) <= $this->toleranciaPx &&
             abs($height - $this->alto) <= $this->toleranciaPx;
 
-        // 🔹 DPI
-        $dpi = ImageDpiReader::getDpi($path);
-        $okDpi = $dpi === 300;
+        // DPI calculado (NO leído)
+        $dpiX = $this->calcularDpi($width, $this->anchoCm);
+        $dpiY = $this->calcularDpi($height, $this->altoCm);
 
+        $okDpi =
+            abs($dpiX - $this->dpiEsperado) <= $this->toleranciaDpi &&
+            abs($dpiY - $this->dpiEsperado) <= $this->toleranciaDpi;
 
         $ok = $okDimensiones && $okDpi;
 
         return [
             'key' => 'dimensiones',
-            'label' => 'Dimensiones y resolución (240x288 @300 DPI)',
+            'label' => 'Dimensiones y resolución (240x288 ≈300 DPI)',
             'ok' => $ok,
             'mensaje' => $ok
                 ? null
-                : $this->buildMensaje($width, $height, $dpi),
+                : $this->buildMensaje($width, $height, $dpiX, $dpiY),
         ];
     }
 
-    protected function getDpi(string $path): ?int
+    protected function calcularDpi(int $px, float $cm): int
     {
-        // 1️⃣ EXIF
-        if (function_exists('exif_read_data')) {
-            $exif = @exif_read_data($path);
-            if ($exif && !empty($exif['XResolution'])) {
-                $xRes = $exif['XResolution'];
-
-                if (is_string($xRes) && str_contains($xRes, '/')) {
-                    [$num, $den] = array_map('intval', explode('/', $xRes));
-                    if ($den > 0) return (int) round($num / $den);
-                }
-
-                if (is_array($xRes) && count($xRes) === 2 && $xRes[1] > 0) {
-                    return (int) round($xRes[0] / $xRes[1]);
-                }
-
-                if (is_numeric($xRes)) {
-                    return (int) round($xRes);
-                }
-            }
-        }
-
-        // 2️⃣ JFIF (fallback)
-        $info = @getimagesize($path, $details);
-        if (!empty($details['jfif_unit']) && !empty($details['jfif_density'])) {
-            $unit = $details['jfif_unit'];
-            [$dx, $dy] = $details['jfif_density'];
-
-            // unidad 1 = DPI, unidad 2 = DPCM
-            if ($unit === 1) {
-                return (int) round($dx);
-            }
-
-            if ($unit === 2) {
-                return (int) round($dx * 2.54);
-            }
-        }
-
-        return null;
+        return (int) round(($px / $cm) * 2.54);
     }
 
-    protected function buildMensaje(int $w, int $h, ?int $dpi): string
+    protected function buildMensaje(int $w, int $h, int $dpiX, int $dpiY): string
     {
         $errores = [];
 
@@ -91,10 +57,11 @@ class DimensionRule
             $errores[] = "Dimensiones inválidas: {$w}x{$h}px";
         }
 
-        if ($dpi === null) {
-            $errores[] = 'Resolución no detectada (DPI no definido)';
-        } elseif ($dpi !== $this->dpiEsperado) {
-            $errores[] = "Resolución inválida: {$dpi} DPI";
+        if (
+            abs($dpiX - $this->dpiEsperado) > $this->toleranciaDpi ||
+            abs($dpiY - $this->dpiEsperado) > $this->toleranciaDpi
+        ) {
+            $errores[] = "Resolución inválida: {$dpiX}x{$dpiY} DPI";
         }
 
         return implode(' | ', $errores);

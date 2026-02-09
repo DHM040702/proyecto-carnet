@@ -8,7 +8,7 @@ use App\Services\ValidacionFoto\Reglas\{
     FormatoRule,
     FondoRule,
     FastApiRule,
-    OjosBocaRule
+    FastApiRuleFondo,   // FastAPI
 };
 
 class ValidadorFoto
@@ -21,9 +21,9 @@ class ValidadorFoto
             new FormatoRule(),
             new PesoRule(),
             new DimensionRule(),
-            new FondoRule(),
-            new FastApiRule()
-            //new OjosBocaRule(),
+            //new FondoRule(),
+            new FastApiRuleFondo(),   // FastAPI
+            new FastApiRule(),
         ];
     }
 
